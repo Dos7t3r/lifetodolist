@@ -36,7 +36,7 @@ $completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) 
     <style>
         @font-face {
             font-family: 'AaBeiYuLinShiDeXin';
-            src: url('./AaBeiYuLinShiDeXin-2.woff2') format('woff2');
+            src: url('https://blog.iambzy.com/todolist/AaBeiYuLinShiDeXin-2.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
@@ -51,7 +51,7 @@ $completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) 
         <div class="event-grid">
             <?php if (!empty($events)): ?>
                 <?php foreach ($events as $event): ?>
-                    <div class="event-card" data-id="<?= htmlspecialchars($event['id']) ?>" onclick="fetchEventDetails(<?= $event['id'] ?>)">
+                    <div class="event-card" data-id="<?= htmlspecialchars($event['id']) ?>">
                         <div class="event-card-inner">
                             <div class="event-content">
                                 <h3 class="event-name"><?= htmlspecialchars($event['name']) ?></h3>
@@ -79,7 +79,7 @@ $completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) 
     <!-- 模态框 -->
     <div id="eventModal" class="modal">
         <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
+            <span class="close">&times;</span>
             <h2 id="modalEventName"></h2>
             <div class="modal-info">
                 <p id="modalEventDescription"></p>
@@ -91,46 +91,70 @@ $completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) 
     </div>
 
     <script>
-        const modal = document.getElementById('eventModal');
+        document.addEventListener("DOMContentLoaded", () => {
+            const modal = document.getElementById("eventModal");
+            const modalContent = modal.querySelector(".modal-content");
+            const closeBtn = document.querySelector(".close");
+            const eventCards = document.getElementsByClassName("event-card");
 
-        // 关闭模态框的函数
-        function closeModal() {
-            modal.classList.remove("show");
-            setTimeout(() => {
-                modal.style.display = "none";
-            }, 300);
-        }
+            // 为每个事件卡片添加点击事件
+            Array.from(eventCards).forEach((card) => {
+                card.addEventListener("click", function () {
+                    const eventId = this.getAttribute("data-id");
+                    fetchEventDetails(eventId);
+                });
+            });
 
-        // 获取事件详情的函数
-        function fetchEventDetails(eventId) {
-            fetch(`get_event_details.php?id=${eventId}`)
-              .then((response) => response.json())
-              .then((data) => {
-                    // 设置模态框中各个元素的文本内容
-                    document.getElementById("modalEventName").textContent = data.name;
-                    document.getElementById("modalEventDescription").textContent = data.description;
+            // 关闭模态框
+            function closeModal() {
+                modal.classList.remove("show");
+                setTimeout(() => {
+                    modal.style.display = "none";
+                }, 300);
+            }
 
-                    const statusText = data.completed? "已完成" : "未完成";
-                    const statusClass = data.completed? "completed" : "";
-                    document.getElementById("modalEventStatus").innerHTML =
-                      `状态: <span class="event-status ${statusClass}">${statusText}</span>`;
+            // 优化：检查 closeBtn 是否存在，避免错误
+            if (closeBtn) {
+                closeBtn.onclick = closeModal;
+            }
 
-                    if (data.completed && data.completionDate) {
-                        document.getElementById("modalEventCompletionDate").textContent = `完成时间: ${data.completionDate}`;
-                    } else {
-                        document.getElementById("modalEventCompletionDate").textContent = "";
-                    }
+            // 点击模态框外部关闭
+            window.onclick = (event) => {
+                if (event.target === modal &&!modalContent.contains(event.target)) {
+                    closeModal();
+                }
+            };
 
-                    document.getElementById("modalEventDetails").textContent = data.details;
+            // 获取事件详情
+            function fetchEventDetails(eventId) {
+                fetch(`get_event_details.php?id=${eventId}`)
+                   .then((response) => response.json())
+                   .then((data) => {
+                        document.getElementById("modalEventName").textContent = data.name;
+                        document.getElementById("modalEventDescription").textContent = data.description;
 
-                    // 显示模态框
-                    modal.style.display = "block";
-                    setTimeout(() => {
-                        modal.classList.add("show");
-                    }, 10);
-                })
-              .catch((error) => console.error("Error:", error));
-        }
+                        const statusText = data.completed? "已完成" : "未完成";
+                        const statusClass = data.completed? "completed" : "";
+                        document.getElementById("modalEventStatus").innerHTML =
+                            `状态: <span class="event-status ${statusClass}">${statusText}</span>`;
+
+                        if (data.completed && data.completionDate) {
+                            document.getElementById("modalEventCompletionDate").textContent = `完成时间: ${data.completionDate}`;
+                        } else {
+                            document.getElementById("modalEventCompletionDate").textContent = "";
+                        }
+
+                        document.getElementById("modalEventDetails").textContent = data.details;
+
+                        // 显示模态框
+                        modal.style.display = "block";
+                        setTimeout(() => {
+                            modal.classList.add("show");
+                        }, 10);
+                    })
+                   .catch((error) => console.error("Error:", error));
+            }
+        });
     </script>
 </body>
 </html>
