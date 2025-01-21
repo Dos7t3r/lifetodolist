@@ -1,10 +1,12 @@
-# Life To do List 人生大事清单
+# Life To do List 人生大事清单 - 每一件事都值得被铭记
 ## 项目灵感：
 灵感来源于这张图，想着开发一个网页端的，于是搞了这么一个东西。数据存储于json中，你可以根据你的实际情况修改。
 
 [![OGz0aY.md.jpg](https://ooo.0x0.ooo/2025/01/21/OGz0aY.md.jpg)](https://img.tg/image/OGz0aY)
 
 ## 在线Demo ： https://blog.iambzy.com/todolist/index.php
+## 更详细的介绍： https://blog.iambzy.com/p/4654
+
 **项目概述**：
 这是一款功能强大的人生大事清单应用程序，旨在为用户提供一个高效且便捷的平台，用于管理和查看人生中的重要事件。
 该程序基于 Web 开发，综合运用了多种前沿技术，包括 PHP、HTML、CSS 和 JavaScript，打造出一个交互性强、用户体验卓越的应用界面。
@@ -30,6 +32,7 @@ The inspiration comes from this picture. I want to develop a web version, so I m
 [![OGz0aY.md.jpg](https://ooo.0x0.ooo/2025/01/21/OGz0aY.md.jpg)](https://img.tg/image/OGz0aY)
 
 ## Demo ： https://blog.iambzy.com/todolist/index.php
+## Introduction ： https://blog.iambzy.com/p/4654
 **Project Overview**:
 This is a powerful life event list application, designed to provide users with an efficient and convenient platform for managing and viewing important events in life.
 The program is based on Web development and uses a variety of cutting-edge technologies, including PHP, HTML, CSS and JavaScript, to create an interactive application interface with excellent user experience.
