@@ -22,8 +22,8 @@ foreach ($events as $event) {
 }
 $uncompletedCount = $totalCount - $completedCount;
 
-// 计算百分比
-$completedPercentage = ($totalCount > 0)? ($completedCount / $totalCount) * 100 : 0;
+// 计算百分比，并使用round函数保留到整数
+$completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) * 100) : 0;
 ?>
 <!DOCTYPE html>
 <html lang="zh">
@@ -45,8 +45,9 @@ $completedPercentage = ($totalCount > 0)? ($completedCount / $totalCount) * 100 
 <body>
     <div class="container">
         <h1>人生大事清单</h1>
+
         <!-- 显示已完成和未完成项目的数量及百分比，并居中 -->
-        <p style="text-align: center;">已完成项目数量：<?= $completedCount ?>，未完成项目数量：<?= $uncompletedCount ?> （<?= $completedCount ?>/<?= $totalCount ?>）<?= $completedPercentage ?>%</p>
+        <p style="text-align: center;">截止2025年1月21日<br>已完成（<?= $completedCount ?>/<?= $totalCount ?>）<?= $completedPercentage ?>%</p>
         <div class="event-grid">
             <?php if (!empty($events)): ?>
                 <?php foreach ($events as $event): ?>
