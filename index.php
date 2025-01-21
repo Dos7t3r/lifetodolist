@@ -36,7 +36,7 @@ $completedPercentage = ($totalCount > 0)? round(($completedCount / $totalCount) 
     <style>
         @font-face {
             font-family: 'AaBeiYuLinShiDeXin';
-            src: url('https://blog.iambzy.com/todolist/AaBeiYuLinShiDeXin-2.woff2') format('woff2');
+            src: url('./AaBeiYuLinShiDeXin-2.woff2') format('woff2');
             font-weight: normal;
             font-style: normal;
         }
