@@ -25,7 +25,7 @@
 
 --------------------------------------------------------------
 
-# Life To do List 人生大事件清单
+# Life To do List - Everything deserves to be remembered
 ## Project inspiration:
 The inspiration comes from this picture. I want to develop a web version, so I made this thing. The data is stored in json, and you can modify it according to your actual situation.
 
